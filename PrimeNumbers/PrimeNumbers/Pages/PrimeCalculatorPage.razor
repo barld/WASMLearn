@@ -1,0 +1,43 @@
+﻿@page "/primes"
+@inject IJSRuntime jsRuntime
+
+
+<h3>PrimeCalculator</h3>
+
+<EditForm Model="@below">
+    <InputNumber @bind-Value="below" />
+</EditForm>
+
+
+<button @onclick="@calculate">calculate Amount</button>
+
+C# blazor
+
+Amount: @amount 
+Within: @time ms.
+
+<br />
+
+JS output
+
+@jsOutput
+
+@code {
+    int below;
+
+    int? amount;
+    long? time;
+
+    string jsOutput = string.Empty;
+
+    private async void calculate()
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        amount = await Task.Run(() => PrimeCalculator.PrimesBelow(this.below).Count());
+
+        sw.Stop();
+        time = sw.ElapsedMilliseconds;
+
+        jsOutput = await jsRuntime.InvokeAsync<string>("performTest", this.below);
+    }
+}
