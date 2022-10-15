@@ -1,0 +1,33 @@
+﻿<h3>PlayCard</h3>
+
+<div>
+    @foreach (var cell in Card.RedRow)
+    {
+       <div class=" @(cell.signed? "signed" : string.Empty)">@cell.number</div>
+    }
+
+    @foreach (var cell in Card.YellowRow)
+    {
+       <div class=" @(cell.signed? "signed" : string.Empty)">@cell.number</div>
+    }
+
+    @foreach (var cell in Card.GreenRow)
+    {
+        <div class=" @(cell.signed? "signed" : string.Empty)">@cell.number</div>
+    }
+
+    @foreach (var cell in Card.BlueRow)
+    {
+        <div class=" @(cell.signed? "signed" : string.Empty)">@cell.number</div>
+    }
+
+
+</div>
+
+
+@code {
+    [Parameter]
+    public GameLogic.PlayCard Card { get; set; }
+}
+
+

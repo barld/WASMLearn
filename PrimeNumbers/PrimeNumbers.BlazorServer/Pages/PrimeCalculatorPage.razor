@@ -1,6 +1,5 @@
 ﻿@page "/primes"
 @using PrimeNumbers.Logic
-@inject IJSRuntime jsRuntime
 
 
 <h3>PrimeCalculator</h3>
@@ -17,11 +16,6 @@ C# blazor
 Amount: @amount 
 Within: @time ms.
 
-<br />
-
-JS output
-
-@jsOutput
 
 @code {
     int below;
@@ -35,13 +29,9 @@ JS output
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
         amount = await Task.Run(() => PrimeCalculator.PrimesBelow(this.below).Count());
-        
 
         sw.Stop();
         time = sw.ElapsedMilliseconds;
-        StateHasChanged();
-
-        jsOutput = await jsRuntime.InvokeAsync<string>("performTest", this.below);
         StateHasChanged();
     }
 }

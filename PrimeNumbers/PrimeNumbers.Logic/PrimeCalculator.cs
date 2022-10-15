@@ -1,4 +1,4 @@
-﻿namespace PrimeNumbers
+﻿namespace PrimeNumbers.Logic
 {
     public class PrimeCalculator
     {
