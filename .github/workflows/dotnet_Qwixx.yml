@@ -3,20 +3,27 @@ name: .NET
 on:
   push:
     branches: [ "master" ]
+    paths: 
+      - './Qwixx/**'
   pull_request:
     branches: [ "master" ]
+    paths: 
+      - './Qwixx/**'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Qwixx
 
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
