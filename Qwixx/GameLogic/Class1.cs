@@ -50,8 +50,8 @@ public static class Actions
     public static bool CanSignCell(IReadOnlyList<RowCell> row, int cellNumber) => row switch
     {
         // it is the last cell
-        [.., RowCell(_, var n)] when n == cellNumber => row.Count((Func<RowCell, bool>)(cell => (bool)cell.Signed)) >= 5,       
-        _ => row.SkipWhile(cell => cell.Number != cellNumber).All((Func<RowCell, bool>)(cell => cell.Signed is false)),
+        [.., RowCell(_, var n)] when n == cellNumber => row.Count(cell => (bool)cell.Signed) >= 5,       
+        _ => row.SkipWhile(cell => cell.Number != cellNumber).All(cell => cell.Signed is false),
     };
 
     public static IReadOnlyList<RowCell> SignCell(IReadOnlyList<RowCell> row, int cellNumber)
